@@ -29,18 +29,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final PageController _pageController = PageController(initialPage: 0);
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  int _pageIndex = 0;
 
   List<Widget> _buildThreePageViewChildren() {
     return <Widget>[
-      Container(color: Colors.red),
       Container(color: Colors.blue),
+      Container(color: Colors.red),
       Container(color: Colors.green),
     ];
   }
@@ -68,30 +62,27 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: PageView(children: _buildThreePageViewChildren()
-          //  Center(
-          //   child: Column(
-          //     mainAxisAlignment: MainAxisAlignment.center,
-          //     children: <Widget>[
-          //       const Text(
-          //         'You have pushed the button this many times:',
-          //       ),
-          //       Text(
-          //         '$_counter',
-          //         style: Theme.of(context).textTheme.headlineMedium,
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          ),
+      body: PageView(
+        controller: _pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        onPageChanged: (value) {
+          setState(() {
+            _pageIndex = value;
+          });
+        },
+        children: _buildThreePageViewChildren(),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: _buildThreeItems(),
-        onTap: (value) {},
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+        currentIndex: _pageIndex,
+        onTap: (value) {
+          print(value);
+          _pageController.animateToPage(
+            value,
+            duration: const Duration(milliseconds: 100),
+            curve: Curves.easeInOut,
+          );
+        },
       ),
     );
   }
