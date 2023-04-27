@@ -1,45 +1,33 @@
+import 'package:fluter_workout/provider/joke.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'provider/counter.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Provider Example'),
+        title: Text('Boring Jokes'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('You have pressed this many times: '),
-            Consumer<Counter>(
-              builder: (context, value, child) => Text('${value.count} times'),
+            Consumer<Joke>(
+              builder: (context, value, child) => Text('${value.joke}'),
+            ),
+            Consumer<Joke>(
+              builder: (context, value, child) =>
+                  value.isLoading ? CircularProgressIndicator() : SizedBox(),
             ),
           ],
         ),
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              Provider.of<Counter>(context, listen: false).increment();
-            },
-            child: Icon(Icons.add),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              Provider.of<Counter>(context, listen: false).reset();
-            },
-            child: Icon(Icons.lock_reset),
-          ),
-        ],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Provider.of<Joke>(context, listen: false).getJoke();
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
