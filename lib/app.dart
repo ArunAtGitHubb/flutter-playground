@@ -1,4 +1,3 @@
-import 'package:fluter_workout/provider/joke.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,21 +11,11 @@ class App extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Consumer<Joke>(
-              builder: (context, value, child) => Text('${value.joke}'),
-            ),
-            Consumer<Joke>(
-              builder: (context, value, child) =>
-                  value.isLoading ? CircularProgressIndicator() : SizedBox(),
-            ),
-          ],
+          children: [],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Provider.of<Joke>(context, listen: false).getJoke();
-        },
+        onPressed: () {},
         child: Icon(Icons.add),
       ),
     );
