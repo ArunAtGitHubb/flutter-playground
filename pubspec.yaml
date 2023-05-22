@@ -10,6 +10,7 @@ dependencies:
   bloc: ^8.1.0
   bloc_concurrency: ^0.2.0
   equatable: ^2.0.3
+  firebase_auth: ^4.5.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
