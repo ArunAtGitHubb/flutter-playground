@@ -1,22 +1,36 @@
-import 'package:fluter_workout/provider/joke.dart';
+import 'package:fluter_workout/provider/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class App extends StatelessWidget {
+import 'view/UserProfile.dart';
+
+class App extends StatefulWidget {
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Boring Jokes'),
+        title: Text('Random User'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Consumer<Joke>(
-              builder: (context, value, child) => Text('${value.joke}'),
+            Consumer<User>(
+              builder: (context, value, child) => value.userJson != null
+                  ? UserProfile(
+                      userJson: value.userJson!,
+                    )
+                  : Text(
+                      'Click the plus symbol to generate new Profile',
+                      style: TextStyle(fontSize: 18.0),
+                    ),
             ),
-            Consumer<Joke>(
+            Consumer<User>(
               builder: (context, value, child) =>
                   value.isLoading ? CircularProgressIndicator() : SizedBox(),
             ),
@@ -25,7 +39,7 @@ class App extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Provider.of<Joke>(context, listen: false).getJoke();
+          Provider.of<User>(context, listen: false).getUser();
         },
         child: Icon(Icons.add),
       ),

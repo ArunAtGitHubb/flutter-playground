@@ -1,27 +1,32 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:fluter_workout/data/joke_model.dart';
-import 'package:fluter_workout/data/joke_repo.dart';
+import 'package:fluter_workout/data/User_repo.dart';
+import 'package:fluter_workout/data/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-class Joke extends ChangeNotifier {
-  final JokeRepo jokeRepo;
+class User extends ChangeNotifier {
+  final UserRepo userRepo;
 
   String joke = "";
   bool isLoading = false;
 
-  Joke({required this.jokeRepo});
+  UserJson? userJson;
 
-  Future<void> getJoke() async {
+  User({
+    required this.userRepo,
+  });
+
+  Future<void> getUser() async {
     isLoading = true;
     notifyListeners();
-    Response? response = await jokeRepo.getJoke();
+    Response? response = await userRepo.getUser();
     if (response.statusCode == 200) {
-      Map<String, dynamic> jsonMap = jsonDecode(response.body);
-      joke = jsonMap["value"];
+      // userJson = jsonDecode(response.body);
+      userJson = UserJson.fromJson(response.body);
+      print(userJson);
       isLoading = false;
       notifyListeners();
     } else {
