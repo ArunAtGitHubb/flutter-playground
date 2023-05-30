@@ -19,7 +19,7 @@ class User extends ChangeNotifier {
     required this.userRepo,
   });
 
-  Future<void> getUser() async {
+  Future<void> getUserData() async {
     isLoading = true;
     notifyListeners();
     Response? response = await userRepo.getUser();

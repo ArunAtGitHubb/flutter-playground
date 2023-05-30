@@ -39,7 +39,7 @@ class _AppState extends State<App> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Provider.of<User>(context, listen: false).getUser();
+          Provider.of<User>(context, listen: false).getUserData();
         },
         child: Icon(Icons.add),
       ),

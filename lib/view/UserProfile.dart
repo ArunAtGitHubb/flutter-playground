@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fluter_workout/data/user/user.dart';
 import 'package:flutter/material.dart';
 
@@ -7,18 +8,30 @@ class UserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var name =
+        "${userJson.results![0].name!.first.toString()} ${userJson.results![0].name!.last.toString()}";
+    var email = userJson.results![0].email.toString();
+    var phone = userJson.results![0].phone.toString();
+    DateTime? dob = userJson.results![0].dob?.date;
     return Container(
       child: Column(
         children: [
-          Image.network(userJson.results![0].picture!.large.toString()),
+          CachedNetworkImage(
+            imageUrl: userJson.results![0].picture!.medium.toString(),
+            progressIndicatorBuilder: (context, url, downloadProgress) =>
+                CircularProgressIndicator(value: downloadProgress.progress),
+            errorWidget: (context, url, error) =>
+                Icon(Icons.error_outline_outlined),
+          ),
           SizedBox(height: 10),
-          Text("First Name: " + userJson.results![0].name!.first.toString()),
+          Text("Name: $name"),
           SizedBox(height: 10),
-          Text("Last Name: " + userJson.results![0].name!.last.toString()),
+          Text("Email: $email"),
           SizedBox(height: 10),
-          Text(userJson.results![0].name!.first.toString()),
+          Text("DOB: ${dob?.day}/${dob?.month}/${dob?.year}"),
           SizedBox(height: 10),
-          Text(userJson.results![0].name!.first.toString()),
+          Text("Phone: $phone"),
+          SizedBox(height: 10),
         ],
       ),
     );
