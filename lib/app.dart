@@ -14,7 +14,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Random User'),
+        title: Text('Generate Random User'),
       ),
       body: Center(
         child: Column(
