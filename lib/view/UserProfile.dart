@@ -11,6 +11,8 @@ class UserProfile extends StatelessWidget {
         "${userJson.results![0].name!.first.toString()} ${userJson.results![0].name!.last.toString()}";
     var imageUrl = userJson.results![0].picture?.large;
     var email = userJson.results![0].email;
+    var phone = userJson.results![0].phone;
+    var gender = userJson.results![0].gender;
     var dob = userJson.results![0].dob;
     var location = userJson.results![0].location;
     return SafeArea(
@@ -71,6 +73,21 @@ class UserProfile extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
+              'Gender',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              gender!,
+              style: TextStyle(
+                fontSize: 14,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
               'Email',
               style: TextStyle(
                 fontSize: 18,
@@ -80,6 +97,21 @@ class UserProfile extends StatelessWidget {
             SizedBox(height: 10),
             Text(
               email!,
+              style: TextStyle(
+                fontSize: 14,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Phone',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              phone!,
               style: TextStyle(
                 fontSize: 14,
               ),
