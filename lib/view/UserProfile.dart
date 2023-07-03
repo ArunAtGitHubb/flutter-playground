@@ -73,7 +73,7 @@ class UserProfile extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              'Gender',
+              'Gender:',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
